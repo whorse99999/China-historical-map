@@ -9,5 +9,27 @@
 <body>
     <h1>中国历代疆域变迁图</h1>
     <p>探索从西周到五代十国的历史疆域变化（约公元前1046年—公元979年）</p>
+
+    
+    <h2>历史年份时间轴</h2>
+    <input type="range" id="yearSlider" min="-1046" max="979" value="-1046">
+    <p>当前年份：<span id="yearDisplay">公元前1046年</span></p>
+
+    <script>
+    const yearSlider = document.getElementById("yearSlider");
+    const yearDisplay = document.getElementById("yearDisplay");
+
+    yearSlider.addEventListener("input", function() {
+        const year = Number(yearSlider.value);
+
+        if (year < 0) {
+            yearDisplay.textContent = "公元前" + Math.abs(year) + "年";
+        } else if (year === 0) {
+            yearDisplay.textContent = "公元1年";
+        } else {
+            yearDisplay.textContent = "公元" + year + "年";
+        }
+    });
+</script>
 </body>
 </html>
