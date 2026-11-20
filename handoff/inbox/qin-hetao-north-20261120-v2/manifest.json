@@ -1,0 +1,17 @@
+{
+  "taskId": "qin-hetao-north-20261120-v2",
+  "period": "秦朝",
+  "referenceYear": null,
+  "files": [
+    "report.md",
+    "sources.md",
+    "candidate.geojson",
+    "manifest.json"
+  ],
+  "status": "pending",
+  "sourceTitle": "《02-3秦时期全图.jpg》（《中国历史地图集》第2册版次待确认）",
+  "licenseStatus": "原图及衍生几何权限未确认",
+  "reviewer": null,
+  "preparedBy": "地图设计部门复核（Codex 整理）",
+  "notes": "麻池小区段独立证据核查未通过；零合格控制点，不附 control-points.csv；待网站开发部门正式复审。"
+}
