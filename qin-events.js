@@ -27,6 +27,10 @@ const qinEvents = [
     "description": "陈胜、吴广在大泽乡发动起义。起义响应迅速，并推动秦末各地反秦力量兴起。",
     "images": [
       {
+        "src": "assets/dazexiang-uprising.jpg",
+        "caption": "大泽乡起义（历史场景插画）"
+      },
+      {
         "src": "assets/event-209-1.svg",
         "caption": "大泽乡示意（自制示意）"
       },
