@@ -1,0 +1,15 @@
+{
+  "taskId": "qin-hetao-north-20261120",
+  "period": "秦朝",
+  "referenceYear": null,
+  "files": [
+    "candidate.geojson",
+    "report.md",
+    "manifest.json"
+  ],
+  "status": "pending",
+  "sourceTitle": "《02-3秦时期全图.jpg》（疑出自《中国历史地图集》第2册，待原版比对）",
+  "licenseStatus": "图版及衍生几何公开使用权限未确认",
+  "reviewer": null,
+  "notes": "待网站开发部门检查。仅提交原创核验说明、公开引文链接与空几何候选记录。禁止展示或合入正式疆域。"
+}
