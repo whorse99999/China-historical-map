@@ -1,35 +1,111 @@
-
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中国历代疆域变迁图</title>
-</head>
-<body>
-    <h1>中国历代疆域变迁图</h1>
-    <p>探索从西周到五代十国的历史疆域变化（约公元前1046年—公元979年）</p>
-
-    
-    <h2>历史年份时间轴</h2>
-    <input type="range" id="yearSlider" min="-1046" max="979" value="-1046">
-    <p>当前年份：<span id="yearDisplay">公元前1046年</span></p>
-
-    <script>
-    const yearSlider = document.getElementById("yearSlider");
-    const yearDisplay = document.getElementById("yearDisplay");
-
-    yearSlider.addEventListener("input", function() {
-        const year = Number(yearSlider.value);
-
-        if (year < 0) {
-            yearDisplay.textContent = "公元前" + Math.abs(year) + "年";
-        } else if (year === 0) {
-            yearDisplay.textContent = "公元1年";
-        } else {
-            yearDisplay.textContent = "公元" + year + "年";
-        }
-    });
-</script>
-</body>
-</html>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>华夏经纬 · 历史疆域时序图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--ink:#282e2c;--muted:#6e7770;--paper:#f5f1e7;--line:#d9d1be;--gold:#a7824e;--dark:#182b29}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Serif SC","Songti SC",serif}button,input{font:inherit}button{cursor:pointer}
+header{height:78px;background:var(--dark);color:#f8f1e2;display:flex;align-items:center;justify-content:space-between;padding:0 34px;border-bottom:3px solid #a48350}header .brand{font-size:25px;font-weight:700;letter-spacing:5px}header small{color:#c5bca8;font-size:12px;letter-spacing:2px}
+main{display:grid;grid-template-columns:320px minmax(0,1fr);height:calc(100vh - 78px);min-height:600px}
+aside{background:#f8f5ed;border-right:1px solid var(--line);padding:27px 24px;overflow:auto} .eyebrow{font-size:11px;letter-spacing:3px;color:#9a7548;margin:0 0 12px}.era{font-size:32px;line-height:1.4;margin:0}.year{font-size:21px;color:#936f42;margin:8px 0 20px}.divider{height:1px;background:var(--line);margin:20px 0}
+h3{font-size:15px;letter-spacing:2px;margin:0 0 13px}.muted{color:var(--muted);font-size:13px;line-height:1.9}.polity{padding:11px 0;border-bottom:1px solid #e5dfd1;display:flex;align-items:center;justify-content:space-between;font-size:14px}.polity span{color:#987344;font-size:11px}
+.stage{position:relative;min-width:0;background:#e8e4d7}#map{height:100%;width:100%;background:#e8e4d7}.map-note{position:absolute;top:18px;right:18px;z-index:600;max-width:260px;padding:13px 16px;background:rgba(250,247,239,.95);border:1px solid #d7ceb9;font-size:12px;line-height:1.7;color:#5f645d;box-shadow:0 4px 18px #2221}
+.timeline{position:absolute;bottom:20px;left:20px;right:20px;z-index:600;background:rgba(250,248,241,.97);border:1px solid #d8cfbd;padding:20px 24px;box-shadow:0 8px 35px #25342c25}
+.trow{display:flex;align-items:center;gap:15px}.trow strong{font-size:20px;min-width:150px}.trow input[type=range]{flex:1;accent-color:#95703f;min-width:40px}.action{background:var(--dark);color:#f7edda;border:0;border-radius:3px;padding:9px 15px}.action:hover{background:#34504a}.ticks{display:flex;justify-content:space-between;font-size:11px;color:#827c70;margin-top:12px}.input-year{width:100px;border:1px solid #cfc5b2;background:white;padding:8px 9px}.hint{font-size:11px;color:#77796f;margin-top:9px}
+.leaflet-container{font-family:"Noto Serif SC",serif}.leaflet-popup-content{line-height:1.8}.city-dot{border-radius:50%;border:2px solid #fff;background:#a27a43;box-shadow:0 0 0 2px #a27a43,0 2px 6px #0005}.leaflet-tooltip{font-size:12px}
+@media(max-width:800px){header{height:65px;padding:0 16px}header .brand{font-size:19px;letter-spacing:2px}header small{display:none}main{height:auto;min-height:0;display:flex;flex-direction:column}aside{order:2;border-right:0;padding:20px}.stage{height:68vh;min-height:470px}.timeline{left:8px;right:8px;bottom:8px;padding:12px}.trow{gap:7px;flex-wrap:wrap}.trow strong{font-size:16px;min-width:112px}.input-year{width:75px}.map-note{right:8px;top:8px;max-width:190px;font-size:10px;padding:8px}.ticks{font-size:9px}}
+</style></head><body>
+<header><div class="brand">华夏经纬 <small>· 中国历史疆域时序图</small></div><small>西周 — 五代十国 · 前1046—979</small></header>
+<main><aside><p class="eyebrow">CHRONICLES OF CHINA</p><h1 class="era" id="era">西周</h1><div class="year" id="yearLabel">公元前1046年</div><p class="muted" id="description"></p><div class="divider"></div><h3>同期主要政权 / 历史中心</h3><div id="polities"></div><div class="divider"></div><h3>关于这张地图</h3><p class="muted">本版为交互功能基础版。地图上的点位是历史都城或代表性中心的大致现代位置，<b>不是疆域边界</b>。不代表当年控制范围；边界数据将在完成史料核验后分期加入。</p><p class="muted">年份可逐年浏览，但历史资料并不支持每一年都有精确疆界。政权起止年、都城位置及历史分期均可能存在学术争议。</p></aside>
+<section class="stage"><div id="map" aria-label="中国历史地图"></div><div class="map-note">◎ 历史地理探索版<br>当前仅标示部分政权中心；<b>未绘制推测疆界</b>。底图为现代地理参照。</div>
+<div class="timeline"><div class="trow"><button class="action" id="play" aria-label="播放时间轴">▶ 播放</button><strong id="timelineYear">前1046年</strong><input id="yearSlider" aria-label="历史年份" type="range" min="0" max="2024" value="0" step="1"><input id="yearInput" class="input-year" aria-label="输入年份，公元前用负数" type="number" min="-1046" max="979" value="-1046"></div><div class="ticks"><span>前1046 · 西周</span><span>前221 · 秦</span><span>220 · 三国</span><span>618 · 唐</span><span>979 · 五代十国末</span></div><div class="hint">拖动时间轴或输入年份（公元前使用负数）；无公元0年。播放按历史时间推进。</div></div></section></main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+"use strict";
+const eras=[
+[-1046,-771,"西周","西周时期，周王室分封诸侯。早期政治影响范围不等于直接行政管辖疆域。"],
+[-770,-476,"东周 · 春秋","周王室东迁后，诸侯力量日益增长，各国势力范围随年代变化。"],
+[-475,-222,"战国","诸侯兼并与变法推动各国疆域频繁变化；具体战国起点有不同划分。"],
+[-221,-207,"秦","秦完成六国统一，实行郡县制。此处仍需区分直接统治和边疆军事活动。"],
+[-206,-202,"秦汉之际","秦末至汉初的战争与政权更替时期。"],
+[-201,8,"西汉","汉朝统治区域随武帝开拓及其后政策变化。"],
+[9,23,"新朝","王莽建立新朝，地方政治局势多变。"],
+[24,24,"汉室恢复时期","新莽末年及东汉建立前后的政权更替。"],
+[25,189,"东汉","东汉以洛阳为主要都城，边疆形势随时期而变化。"],
+[190,219,"东汉末年","群雄割据，实际控制范围与名义朝廷疆域差异很大。"],
+[220,265,"三国","魏、蜀汉、吴并立，建立时间不同，需按所选年份分别判断。"],
+[266,279,"魏晋交替与三国末期","西晋建立后，吴国仍存在，直到280年统一。"],
+[280,316,"西晋","西晋短暂统一后，北方政治局势剧变。"],
+[317,419,"东晋 · 十六国","南方东晋与北方多个政权并存，边界频繁变动。"],
+[420,580,"南北朝","南北多个政权并存，具体政权随年份发生更替。"],
+[581,588,"隋与南朝陈","隋建立时南朝陈尚未灭亡，589年才完成统一。"],
+[589,617,"隋","隋结束长期南北分裂，但末期出现大规模动乱。"],
+[618,906,"唐","唐朝疆域在不同年代变化显著，尤其边疆都护府不宜等同于郡县直辖。"],
+[907,959,"五代十国","中原五代更替，南方及其他地区多个政权并存。"],
+[960,979,"北宋初年 · 十国余绪","北宋于960年建立，至979年灭北汉；这一时期并非全国统一。"]
+];
+const places=[
+{name:"丰镐（西周王畿）",lat:34.20,lng:108.72,start:-1046,end:-771,group:"西周"},
+{name:"洛邑（东周王城）",lat:34.62,lng:112.45,start:-770,end:-256,group:"东周"},
+{name:"临淄（齐）",lat:36.82,lng:118.30,start:-475,end:-221,group:"战国"},
+{name:"邯郸（赵）",lat:36.61,lng:114.49,start:-403,end:-221,group:"战国"},
+{name:"大梁（魏）",lat:34.80,lng:114.31,start:-361,end:-225,group:"战国"},
+{name:"新郑（韩）",lat:34.40,lng:113.74,start:-403,end:-230,group:"战国"},
+{name:"蓟（燕）",lat:39.92,lng:116.39,start:-475,end:-222,group:"战国"},
+{name:"郢（楚，代表性都城）",lat:30.35,lng:112.20,start:-475,end:-278,group:"战国"},
+{name:"咸阳（秦）",lat:34.33,lng:108.71,start:-350,end:-207,group:"秦"},
+{name:"长安（西汉）",lat:34.27,lng:108.94,start:-202,end:8,group:"西汉"},
+{name:"长安（新朝）",lat:34.27,lng:108.94,start:9,end:23,group:"新朝"},
+{name:"洛阳（东汉）",lat:34.62,lng:112.45,start:25,end:220,group:"东汉"},
+{name:"洛阳（曹魏）",lat:34.62,lng:112.45,start:220,end:265,group:"曹魏"},
+{name:"成都（蜀汉）",lat:30.67,lng:104.07,start:221,end:263,group:"蜀汉"},
+{name:"建业（孙吴）",lat:32.06,lng:118.79,start:229,end:280,group:"孙吴"},
+{name:"洛阳（西晋）",lat:34.62,lng:112.45,start:266,end:311,group:"西晋"},
+{name:"建康（东晋）",lat:32.06,lng:118.79,start:317,end:420,group:"东晋"},
+{name:"建康（南朝）",lat:32.06,lng:118.79,start:420,end:589,group:"南朝"},
+{name:"平城（北魏）",lat:40.09,lng:113.30,start:398,end:493,group:"北魏"},
+{name:"洛阳（北魏）",lat:34.62,lng:112.45,start:494,end:534,group:"北魏"},
+{name:"大兴城（隋）",lat:34.27,lng:108.94,start:581,end:618,group:"隋"},
+{name:"长安（唐）",lat:34.27,lng:108.94,start:618,end:907,group:"唐"},
+{name:"洛阳（五代）",lat:34.62,lng:112.45,start:907,end:960,group:"五代"},
+{name:"开封（五代）",lat:34.80,lng:114.31,start:923,end:960,group:"五代"},
+{name:"成都（前后蜀）",lat:30.67,lng:104.07,start:907,end:965,group:"蜀地政权"},
+{name:"金陵（南唐）",lat:32.06,lng:118.79,start:937,end:975,group:"南唐"},
+{name:"杭州（吴越）",lat:30.27,lng:120.15,start:907,end:978,group:"吴越"},
+{name:"太原（北汉）",lat:37.87,lng:112.55,start:951,end:979,group:"北汉"},
+{name:"开封（北宋）",lat:34.80,lng:114.31,start:960,end:979,group:"北宋"}
+];
+const slider=document.getElementById("yearSlider"),yearInput=document.getElementById("yearInput"),play=document.getElementById("play");
+const map=L.map("map",{zoomControl:true,worldCopyJump:true}).setView([35,105],4);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+const markers=L.layerGroup().addTo(map);
+const yearFromIndex=i=>i<1046?i-1046:i-1045;
+const indexFromYear=y=>y<0?y+1046:y+1045;
+const formatYear=y=>y<0?"公元前"+(-y)+"年":"公元"+y+"年";
+let current=-1046,timer=null;
+function render(year){
+ if(!Number.isInteger(year)||year===0||year< -1046||year>979)return;
+ current=year;slider.value=indexFromYear(year);yearInput.value=year;
+ const era=eras.find(e=>year>=e[0]&&year<=e[1])||eras[0];
+ document.getElementById("era").textContent=era[2];
+ document.getElementById("yearLabel").textContent=formatYear(year);
+ document.getElementById("timelineYear").textContent=(year<0?"前"+(-year):year)+"年";
+ document.getElementById("description").textContent=era[3];
+ markers.clearLayers();const active=places.filter(p=>year>=p.start&&year<=p.end);
+ document.getElementById("polities").replaceChildren();
+ if(!active.length){const p=document.createElement("p");p.className="muted";p.textContent="这一年份尚未收录代表性中心点位。";document.getElementById("polities").append(p)}
+ active.forEach(p=>{
+ const row=document.createElement("div");row.className="polity";
+ const name=document.createElement("div");name.textContent=p.name;
+ const group=document.createElement("span");group.textContent=p.group;row.append(name,group);
+ document.getElementById("polities").append(row);
+ const dot=L.circleMarker([p.lat,p.lng],{radius:6,color:"#fff",weight:2,fillColor:"#9c7541",fillOpacity:.95});
+ dot.bindTooltip(p.name).bindPopup("<b>"+p.name+"</b><br>代表性历史中心（近似现代位置）<br>非疆域边界");dot.addTo(markers);
+ });
+}
+slider.addEventListener("input",()=>render(yearFromIndex(Number(slider.value))));
+yearInput.addEventListener("change",()=>{const n=Number(yearInput.value);if(!Number.isInteger(n)||n===0||n< -1046||n>979){alert("请输入前1046至前1年，或公元1至979年（无公元0年）。");yearInput.value=current;return}render(n)});
+play.addEventListener("click",()=>{if(timer){clearInterval(timer);timer=null;play.textContent="▶ 播放";return}play.textContent="Ⅱ 暂停";timer=setInterval(()=>{let i=indexFromYear(current)+5;if(i>2024){clearInterval(timer);timer=null;play.textContent="▶ 播放";return}render(yearFromIndex(i))},120)});
+render(-1046);
+</script></body></html>
