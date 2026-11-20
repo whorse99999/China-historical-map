@@ -16,9 +16,10 @@ h3{font-size:15px;letter-spacing:2px;margin:0 0 13px}.muted{color:var(--muted);f
 .leaflet-container{font-family:"Noto Serif SC",serif}.leaflet-popup-content{line-height:1.8}.city-dot{border-radius:50%;border:2px solid #fff;background:#a27a43;box-shadow:0 0 0 2px #a27a43,0 2px 6px #0005}.leaflet-tooltip{font-size:12px}
 @media(max-width:800px){header{height:65px;padding:0 16px}header .brand{font-size:19px;letter-spacing:2px}header small{display:none}main{height:auto;min-height:0;display:flex;flex-direction:column}aside{order:2;border-right:0;padding:20px}.stage{height:68vh;min-height:470px}.timeline{left:8px;right:8px;bottom:8px;padding:12px}.trow{gap:7px;flex-wrap:wrap}.trow strong{font-size:16px;min-width:112px}.input-year{width:75px}.map-note{right:8px;top:8px;max-width:190px;font-size:10px;padding:8px}.ticks{font-size:9px}}
  .leaflet-control-layers{background:#fffaf0!important;border:2px solid #a7824e!important;box-shadow:0 3px 14px #0003!important;font-size:13px!important}.leaflet-control-layers label{padding:3px 0}.leaflet-top.leaflet-left .leaflet-control-layers{margin-top:62px}.boundary-status{border:1px solid #d6c8ab;background:#f1ead9;padding:12px;margin:12px 0;font-size:12px;line-height:1.8}.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;margin:7px 0}.legend-swatch{width:14px;height:14px;border:1px solid #fff;box-shadow:0 0 0 1px #999;flex-shrink:0}.boundary-switch{display:flex;align-items:center;gap:9px;font-size:13px;margin:13px 0} .boundary-switch input{accent-color:#95703f}.quick-years{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}.quick-years button{border:1px solid #cfc3ac;background:#fffaf0;color:#5b5345;border-radius:3px;padding:7px 9px;font-size:12px}.quick-years button:hover,.quick-years button:focus-visible{background:#e7dcc6;outline:2px solid #a7824e;outline-offset:1px}.polity{cursor:pointer}.polity:hover,.polity:focus-visible{background:#eee7d8;outline:1px solid #bda981}.share-status{font-size:12px;color:#6e7770;min-height:20px;margin-top:8px}.timeline{position:fixed;bottom:0;left:0;right:0;z-index:1000;padding:17px 30px 18px;border-left:0;border-right:0;border-bottom:0;box-shadow:0 -5px 25px #25342c22}.timeline .trow{gap:20px}.timeline .trow input[type=range]{height:32px;cursor:pointer}.timeline .trow strong{min-width:160px;font-size:23px}.era-nodes{display:flex;gap:6px;overflow-x:auto;padding:4px 0 11px;scrollbar-width:thin}.era-node{white-space:nowrap;border:1px solid #d5c8b1;border-radius:6px;background:#fffaf0;color:#625640;padding:9px 13px;font-size:13px;flex:1 0 auto;min-width:74px}.era-node.active{background:#273d36;color:#fff5e4;border-color:#273d36}.timeline .ticks{margin-top:9px}.timeline .hint{margin-top:7px}main{height:calc(100vh - 78px - 172px);min-height:380px}.stage{min-height:380px}@media(max-width:800px){main{height:auto;min-height:0}.stage{height:calc(100dvh - 65px - 194px);min-height:300px}.timeline{padding:11px 12px 13px}.era-nodes{padding-bottom:8px}.era-node{font-size:12px;padding:8px 10px;min-width:64px}.timeline .trow{gap:7px}.timeline .trow strong{min-width:88px;font-size:17px}.timeline .ticks{font-size:9px}.timeline .hint{font-size:10px}aside{padding-bottom:210px}}@media(min-width:801px){aside{padding-bottom:36px}} .event-list{display:grid;gap:8px}.event-list button{border:1px solid var(--line);background:#fffaf0;color:var(--ink);padding:10px;text-align:left;border-radius:4px}.event-list button[aria-pressed=true]{background:var(--dark);color:#fffaf0}.event-pin{background:#983d31;border:2px solid white;border-radius:100%;box-shadow:0 1px 5px #0008}.event-pin.active{background:#d57047;outline:3px solid #983d3166}.event-gallery{display:grid;gap:8px}.event-gallery figure{margin:0}.event-gallery img{display:block;width:100%;border-radius:4px}.event-gallery figcaption{font-size:14px;margin:4px 0 8px}.event-details{line-height:1.7}.leaflet-popup-content button{margin-top:8px}.leaflet-control-layers{max-width:45vw}
+.ancient-city-dot{background:#8b622e;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #805522}.ancient-city-dot.capital{background:#604627}.city-label{background:#fffaf1;color:#4d3a27}.admin-seat{background:#e2eee7;border:2px solid #386d5c;border-radius:2px}
 </style></head><body>
 <header><div class="brand">华夏经纬 <small>· 中国历史疆域时序图</small></div><small>西周 — 五代十国 · 前1046—979</small></header>
-<main><aside><p class="eyebrow">CHRONICLES OF CHINA</p><h1 class="era" id="era">西周</h1><div class="year" id="yearLabel">公元前1046年</div><p class="muted" id="description"></p><div class="divider"></div><h3>重要年份快捷跳转</h3><div class="quick-years" id="quickYears"></div><button class="action" id="shareYear" type="button">复制当前年份链接</button><div class="share-status" id="shareStatus" role="status"></div><div class="divider"></div><h3>同期主要政权 / 历史中心</h3><div id="polities"></div><section id="qinEvents" hidden><div class="divider"></div><h3>重大历史事件</h3><div id="eventList" class="event-list"></div><article id="eventDetails" tabindex="-1" class="event-details" aria-live="polite"></article></section><div class="divider"></div><h3>历史疆域图层</h3><label class="boundary-switch"><input type="checkbox" id="boundaryToggle" checked> 显示已核验疆域边界</label><div class="boundary-status" id="boundaryStatus" role="status">正在读取疆域资料…</div><div id="boundaryLegend"></div><div class="divider"></div><h3>关于这张地图</h3><p class="muted">本版为交互功能基础版。地图上的点位标注为相应时期的历史名称，坐标仍为待进一步核验的近似位置，<b>不是疆域边界</b>。不代表当年控制范围；边界数据将在完成史料核验后分期加入。</p><p class="muted">年份可逐年浏览，但历史资料并不支持每一年都有精确疆界。政权起止年、都城位置及历史分期均可能存在学术争议。</p></aside>
+<main><aside><p class="eyebrow">CHRONICLES OF CHINA</p><h1 class="era" id="era">西周</h1><div class="year" id="yearLabel">公元前1046年</div><p class="muted" id="description"></p><div class="divider"></div><h3>重要年份快捷跳转</h3><div class="quick-years" id="quickYears"></div><button class="action" id="shareYear" type="button">复制当前年份链接</button><div class="share-status" id="shareStatus" role="status"></div><div class="divider"></div><h3>同期主要政权 / 历史中心</h3><div id="polities"></div><section id="qinEvents" hidden><div class="divider"></div><h3>重大历史事件</h3><div id="eventList" class="event-list"></div><article id="eventDetails" tabindex="-1" class="event-details" aria-live="polite"></article></section><div class="divider"></div><h3>地图图层</h3><label class="boundary-switch"><input type="checkbox" id="cityToggle" checked> 古代城市</label><label class="boundary-switch"><input type="checkbox" id="adminToggle"> 历代行政区划</label><div class="boundary-status" id="adminStatus" role="status" hidden></div><h3>历史疆域图层</h3><label class="boundary-switch"><input type="checkbox" id="boundaryToggle" checked> 显示已核验疆域边界</label><div class="boundary-status" id="boundaryStatus" role="status">正在读取疆域资料…</div><div id="boundaryLegend"></div><div class="divider"></div><h3>关于这张地图</h3><p class="muted">本版为交互功能基础版。地图上的点位标注为相应时期的历史名称，坐标仍为待进一步核验的近似位置，<b>不是疆域边界</b>。不代表当年控制范围；边界数据将在完成史料核验后分期加入。</p><p class="muted">年份可逐年浏览，但历史资料并不支持每一年都有精确疆界。政权起止年、都城位置及历史分期均可能存在学术争议。</p></aside>
 <section class="stage"><div id="map" aria-label="中国历史地图"></div><div class="map-note">柔和立体地形底图<br>历史地点和事件标记采用近似位置。</div>
 <div class="timeline"><div class="era-nodes" id="eraNodes" aria-label="历史朝代节点导航"></div><div class="trow"><button class="action" id="play" aria-label="播放时间轴">▶ 播放</button><strong id="timelineYear">前1046年</strong><input id="yearSlider" aria-label="历史年份" type="range" min="0" max="2024" value="0" step="1"><input id="yearInput" class="input-year" aria-label="输入年份，公元前用负数" type="number" min="-1046" max="979" value="-1046"></div><div class="ticks"><span>前1046 · 西周</span><span>前221 · 秦</span><span>220 · 三国</span><span>618 · 唐</span><span>979 · 五代十国末</span></div><div class="hint">拖动时间轴或输入年份（公元前使用负数）；无公元0年。播放按历史时间推进。</div></div></section></main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -68,7 +69,7 @@ const places=[
 {name:"建康（南朝）",lat:32.06,lng:118.79,start:420,end:589,group:"南朝"},
 {name:"平城（北魏）",lat:40.09,lng:113.30,start:398,end:493,group:"北魏"},
 {name:"洛阳（北魏）",lat:34.62,lng:112.45,start:494,end:534,group:"北魏"},
-{name:"大兴城（隋）",lat:34.27,lng:108.94,start:581,end:618,group:"隋"},
+{name:"大兴城（隋）",lat:34.27,lng:108.94,start:581,end:617,group:"隋"},
 {name:"长安（唐）",lat:34.27,lng:108.94,start:618,end:907,group:"唐"},
 {name:"洛阳（五代）",lat:34.62,lng:112.45,start:907,end:960,group:"五代"},
 {name:"开封（五代）",lat:34.80,lng:114.31,start:923,end:960,group:"五代"},
@@ -77,6 +78,32 @@ const places=[
 {name:"杭州（吴越）",lat:30.27,lng:120.15,start:907,end:978,group:"吴越"},
 {name:"太原（北汉）",lat:37.87,lng:112.55,start:951,end:979,group:"北汉"},
 {name:"开封（北宋）",lat:34.80,lng:114.31,start:960,end:979,group:"北宋"}
+];
+// A city may have multiple time-bound names at the same location.
+const cityDetailsByName={
+ "咸阳（秦）":{level:"都城",modern:"陕西省咸阳市、今西安市西咸新区一带",description:"秦王政统一六国后继续以咸阳为都。图示点位为近似位置。",eventYears:[-221]},
+ "长安（西汉）":{level:"都城",modern:"陕西省西安市西北部",description:"西汉定都长安，城址位于今西安市西北部。"},
+ "长安（新朝）":{level:"都城",modern:"陕西省西安市西北部"},
+ "大兴城（隋）":{level:"都城",modern:"陕西省西安市城区一带",description:"隋代都城大兴，唐代沿用此城并称长安。"},
+ "长安（唐）":{level:"都城",modern:"陕西省西安市城区一带",description:"唐代都城，沿用隋代大兴城的城市格局。"}
+};
+const localCities=[
+ {name:"陈",lat:33.73,lng:114.88,start:-221,end:-207,group:"秦",level:"郡治",
+  modern:"河南省周口市淮阳区一带",draft:true,
+  description:"陈地与秦末起义相关。图示采用今淮阳附近的近似点；秦代郡治与使用年代待核验。",eventYears:[-209]},
+ {name:"大泽乡",lat:33.56,lng:117.10,start:-209,end:-209,group:"秦",level:"历史聚落",
+  modern:"安徽省宿州市一带",draft:true,
+  description:"陈胜、吴广起义的发生地。图示沿用事件的近似点位。",eventYears:[-209]}
+];
+// Polygon and MultiPolygon geometries are rendered only when status is verified.
+// For records without verified geometry, use a documented seat with coordinates.
+const adminDivisions=[
+ {type:"Feature",geometry:null,properties:{
+  name:"陈郡",level:"郡",polity:"秦",start:-221,end:-207,status:"draft",
+  seat:{name:"陈",lat:33.73,lng:114.88},
+  description:"项目资料记录的秦代候选郡治。点位及展示时段均待复核。",
+  source:"项目秦朝地图专项 · 郡级驻所研究记录"
+ }}
 ];
 const slider=document.getElementById("yearSlider"),yearInput=document.getElementById("yearInput"),play=document.getElementById("play");
 const shortcuts=[[-1046,"西周"],[-770,"春秋"],[-403,"战国"],[-221,"秦"],[-202,"西汉"],[25,"东汉"],[220,"三国"],[317,"东晋"],[420,"南北朝"],[581,"隋"],[618,"唐"],[907,"五代"],[960,"北宋初年"],[979,"979年"]];
@@ -91,7 +118,28 @@ document.getElementById("shareYear").addEventListener("click",async()=>{const ur
 const map=L.map("map",{zoomControl:true,worldCopyJump:false,minZoom:3,maxBounds:[[0,38],[61,157]],maxBoundsViscosity:1}).setView([36,105],4);
 const terrainLayer=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}",{maxNativeZoom:13,maxZoom:18,attribution:'Tiles &copy; Esri; source: Esri, USGS, NOAA'}).addTo(map);
 map.fitBounds([[8,56],[54,145]],{padding:[12,12],animate:false});
-const markers=L.layerGroup().addTo(map);
+const cityLayer=L.layerGroup().addTo(map);
+map.createPane("adminAreas").style.zIndex="390";
+const adminAreas=L.geoJSON(null,{
+ pane:"adminAreas",
+ style:{color:"#386d5c",weight:2,opacity:.65,fillOpacity:.12},
+ onEachFeature:(feature, layer)=>layer.bindPopup(adminDetails(feature.properties))
+});
+const adminSeats=L.layerGroup();
+const adminLayer=L.layerGroup([adminAreas,adminSeats]);
+const cityToggle=document.getElementById("cityToggle");
+const adminToggle=document.getElementById("adminToggle");
+const adminStatus=document.getElementById("adminStatus");
+cityToggle.addEventListener("change",()=>{
+ if(cityToggle.checked)cityLayer.addTo(map);
+ else map.removeLayer(cityLayer);
+});
+adminToggle.addEventListener("change",()=>{
+ adminStatus.hidden=!adminToggle.checked;
+ if(adminToggle.checked)adminLayer.addTo(map);
+ else map.removeLayer(adminLayer);
+});
+map.on("zoomend",()=>renderCities(current));
 const eventMarkers=L.layerGroup().addTo(map);
 const qinBounds=L.latLngBounds([[28,101],[41,124]]);
 const eventSection=document.getElementById("qinEvents");
@@ -136,7 +184,7 @@ function renderEvents(year,era){
  for(const [index,event] of qinEvents.entries()){
   const selected=event.year===year;
   eventList.children[index].setAttribute("aria-pressed",String(selected));
-  const icon=L.divIcon({className:"event-pin"+(selected?" active":""),iconSize:[17,17]});
+  const icon=L.divIcon({className:"event-pin"+(selected?" active":""),iconSize:[17,17],iconAnchor:[-5,17],popupAnchor:[13,-18]});
   const marker=L.marker([event.lat,event.lng],{icon,title:event.title,eventYear:event.year});
   const popup=document.createElement("div");
   const link=document.createElement("button");
@@ -193,6 +241,95 @@ function updateBoundaries(){const active=boundaryFeatures.filter(f=>current>=f.p
 const yearFromIndex=i=>i<1046?i-1046:i-1045;
 const indexFromYear=y=>y<0?y+1046:y+1045;
 const formatYear=y=>y<0?"公元前"+(-y)+"年":"公元"+y+"年";
+function detailBox(title, fields){
+ const box=document.createElement("div");
+ const heading=document.createElement("strong");
+ heading.textContent=title;
+ box.append(heading);
+ for(const [label,value] of fields){
+  const line=document.createElement("div");
+  line.textContent=label+"："+value;
+  box.append(line);
+ }
+ return box;
+}
+function adminDetails(p){
+ const box=detailBox(p.name,[
+  ["层级",p.level],["所属政权",p.polity],
+  [p.status==="verified"?"起止年份":"草稿展示时段",formatYear(p.start)+"至"+formatYear(p.end)],
+  ["治所",p.seat?.name||"待补充"],["历史介绍",p.description],["资料来源",p.source]
+ ]);
+ if(p.status!=="verified"){
+  const status=document.createElement("strong");
+  status.textContent="研究草稿";
+  box.prepend(status,document.createElement("br"));
+ }
+ if(p.sourceUrl && /^https:\/\//.test(p.sourceUrl)){
+  const link=document.createElement("a");
+  link.href=p.sourceUrl;
+  link.target="_blank";
+  link.rel="noopener noreferrer";
+  link.textContent="查看来源";
+  box.append(link);
+ }
+ return box;
+}
+function renderAdmin(year){
+ const active=adminDivisions.filter(({properties:p})=>year>=p.start&&year<=p.end);
+ const polygons=active.filter(({geometry,properties})=>properties.status==="verified"&&["Polygon","MultiPolygon"].includes(geometry?.type));
+ adminAreas.clearLayers();
+ adminAreas.addData({type:"FeatureCollection",features:polygons});
+ adminSeats.clearLayers();
+ const seats=active.filter(feature=>!polygons.includes(feature)&&Number.isFinite(feature.properties.seat?.lat)&&Number.isFinite(feature.properties.seat?.lng));
+ for(const {properties:p} of seats){
+  const label=p.name+"治所"+(p.status==="verified"?"":"（研究草稿）");
+  const icon=L.divIcon({className:"admin-seat",iconSize:[14,14],iconAnchor:[-5,-4]});
+  L.marker([p.seat.lat,p.seat.lng],{icon,title:label,alt:label})
+   .bindTooltip(label).bindPopup(adminDetails(p)).addTo(adminSeats);
+ }
+ adminStatus.textContent=polygons.length
+  ?"已显示 "+polygons.length+" 个已核验行政区域及 "+seats.length+" 个治所点位。"
+  :seats.length?"行政区界待补充。当前显示治所点位，未核验记录标为研究草稿。"
+  :"当前年份的行政区划数据待补充。";
+}
+const cityZoomByLevel={"郡治":6,"县治":7,"历史聚落":8,"普通城邑":8};
+function renderCities(year){
+ cityLayer.clearLayers();
+ cityMarkers.clear();
+ for(const place of [...places,...localCities]){
+  if(year<place.start||year>place.end)continue;
+  const metadata={...place,...cityDetailsByName[place.name]};
+  if(map.getZoom()<(metadata.minZoom??cityZoomByLevel[metadata.level]??3))continue;
+  const name=place.name.split("（")[0];
+  const level=metadata.level||"重要历史中心";
+  const popup=detailBox(name,[
+   ["所属政权",place.group],["行政级别",level],
+   ["现代位置",metadata.modern||"近似坐标 "+place.lat+"°N，"+place.lng+"°E"],
+   ["历史介绍",metadata.description||place.name+"是所选时期收录的代表性中心。"],
+   ["资料状态",metadata.draft?"研究草稿 · 点位待核验":"近似点位 · 研究草稿"]
+  ]);
+  const related=qinEvents.filter(event=>metadata.eventYears?.includes(event.year));
+  const events=document.createElement("div");
+  events.textContent=related.length?"相关事件":"暂无已收录的相关事件";
+  for(const event of related){
+   const button=document.createElement("button");
+   button.type="button";
+   button.textContent=event.title;
+   button.addEventListener("click",()=>showEvent(event));
+   events.append(document.createElement("br"),button);
+  }
+  popup.append(events);
+  const capital=level==="都城";
+  const size=capital?14:10;
+  const title=name+(metadata.draft?"（研究草稿）":"");
+  const icon=L.divIcon({className:"ancient-city-dot"+(capital?" capital":""),iconSize:[size,size]});
+  const marker=L.marker([place.lat,place.lng],{icon,title,alt:title})
+   .bindTooltip(title,{permanent:true,direction:"left",offset:[-7,0],className:"city-label"})
+   .bindPopup(popup).addTo(cityLayer);
+  cityMarkers.set(place,marker);
+ }
+}
+const cityMarkers=new Map();
 let current=-1046,timer=null;
 function render(year){
  if(!Number.isInteger(year)||year===0||year< -1046||year>979)return;
@@ -206,7 +343,9 @@ function render(year){
  document.getElementById("description").textContent=era[3];
  renderEvents(year,era);
  updateBoundaries();
- markers.clearLayers();const active=places.filter(p=>year>=p.start&&year<=p.end);
+ renderAdmin(year);
+ renderCities(year);
+ const active=places.filter(p=>year>=p.start&&year<=p.end);
  document.getElementById("polities").replaceChildren();
  if(!active.length){const p=document.createElement("p");p.className="muted";p.textContent="这一年份尚未收录代表性中心点位。";document.getElementById("polities").append(p)}
  active.forEach(p=>{
@@ -214,9 +353,21 @@ function render(year){
  const name=document.createElement("div");name.textContent=p.name;
  const group=document.createElement("span");group.textContent=p.group;row.append(name,group);
  document.getElementById("polities").append(row);
- row.tabIndex=0;row.setAttribute("role","button");row.setAttribute("aria-label","定位"+p.name);const focus=()=>{map.flyTo([p.lat,p.lng],Math.max(map.getZoom(),6),{duration:.5});dot.openPopup()};row.addEventListener("click",focus);row.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();focus()}});
- const dot=L.circleMarker([p.lat,p.lng],{radius:6,color:"#fff",weight:2,fillColor:"#9c7541",fillOpacity:.95});
- dot.bindTooltip(p.name).bindPopup("<b>"+p.name+"</b><br>代表性历史中心（近似现代位置）<br>非疆域边界");dot.addTo(markers);
+ row.tabIndex=0;
+ row.setAttribute("role","button");
+ row.setAttribute("aria-label","定位"+p.name);
+ const focus=()=>{
+  if(!cityToggle.checked){
+   cityToggle.checked=true;
+   cityLayer.addTo(map);
+  }
+  map.setView([p.lat,p.lng],Math.max(map.getZoom(),6));
+  cityMarkers.get(p)?.openPopup();
+ };
+ row.addEventListener("click",focus);
+ row.addEventListener("keydown",e=>{
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();focus()}
+ });
  });
 }
 slider.addEventListener("input",()=>{stopPlayback();render(yearFromIndex(Number(slider.value)))});
