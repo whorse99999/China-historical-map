@@ -1,0 +1,17 @@
+{
+  "taskId": "qin-hetao-north-20261120-v3",
+  "period": "秦朝",
+  "referenceYear": null,
+  "files": [
+    "report.md",
+    "sources.md",
+    "candidate.geojson",
+    "review-records.json",
+    "manifest.json"
+  ],
+  "status": "pending",
+  "sourceTitle": "《02-3秦时期全图.jpg》（同版原件待确认）",
+  "licenseStatus": "原图与衍生矢量公开许可未确认",
+  "reviewer": null,
+  "notes": "基于 v2 复审追加证据。零合格独立点，无控制点 CSV。历史、测绘与授权三项未获独立签署。"
+}
