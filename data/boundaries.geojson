@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "历史疆域边界数据",
+    "version": "0.1.0",
+    "status": "awaiting-source-verification",
+    "description": "仅收录经核验的历史疆域多边形；未核验前保持空集合。不能将现代行政边界、历史中心点或想象的多边形充作历史疆域。",
+    "featureSchema": {
+      "properties": {
+        "name": "政权名称",
+        "startYear": "起始年（负数为公元前，无0年）",
+        "endYear": "结束年",
+        "referenceYear": "史料参考年代",
+        "sourceTitle": "资料名称",
+        "sourceUrl": "公开可核验的资料链接",
+        "confidence": "high|medium|low",
+        "boundaryType": "direct-rule|approximate|influence|disputed",
+        "color": "十六进制颜色"
+      }
+    }
+  },
+  "features": []
+}
