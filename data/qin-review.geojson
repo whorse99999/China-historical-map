@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "秦朝专项阶段核验记录",
+    "status": "pending-review",
+    "reviewDate": "2026-11-20",
+    "reference": "秦时期全图",
+    "georeference": {
+      "controlPoints": 22,
+      "fitPoints": 17,
+      "holdoutPoints": 5,
+      "model": "second-order empirical",
+      "holdoutRMSEKm": 31.19,
+      "holdoutMaxErrorKm": 50
+    },
+    "publication": "No verified WGS84 geometry. Do not render as historical boundary.",
+    "rights": "Source image and derivative publication permissions unverified.",
+    "adminCandidates": [
+      "内史",
+      "陇西郡",
+      "北地郡",
+      "蜀郡",
+      "巴郡",
+      "南郡",
+      "辽西郡",
+      "辽东郡",
+      "南海郡",
+      "桂林郡",
+      "象郡"
+    ],
+    "placeCandidates": [
+      "咸阳",
+      "陈郡",
+      "大泽乡"
+    ],
+    "boundaryPixelSampleCount": 11
+  },
+  "features": []
+}
