@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "qin-hetao-north",
+      "geometry": null,
+      "properties": {
+        "name": "秦朝北界·河套北缘",
+        "startYear": null,
+        "endYear": null,
+        "referenceYear": null,
+        "sourceTitle": "《02-3秦时期全图.jpg》（《中国历史地图集》第2册版次待确认）",
+        "confidence": "区域证据可查，独立界点未通过",
+        "boundaryType": "disputed",
+        "color": null,
+        "reviewStatus": "pending",
+        "coordinateStatus": "unverified",
+        "display": false
+      }
+    }
+  ]
+}
