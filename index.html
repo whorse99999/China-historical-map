@@ -19,7 +19,7 @@ h3{font-size:15px;letter-spacing:2px;margin:0 0 13px}.muted{color:var(--muted);f
 </style></head><body>
 <header><div class="brand">华夏经纬 <small>· 中国历史疆域时序图</small></div><small>西周 — 五代十国 · 前1046—979</small></header>
 <main><aside><p class="eyebrow">CHRONICLES OF CHINA</p><h1 class="era" id="era">西周</h1><div class="year" id="yearLabel">公元前1046年</div><p class="muted" id="description"></p><div class="divider"></div><h3>重要年份快捷跳转</h3><div class="quick-years" id="quickYears"></div><button class="action" id="shareYear" type="button">复制当前年份链接</button><div class="share-status" id="shareStatus" role="status"></div><div class="divider"></div><h3>同期主要政权 / 历史中心</h3><div id="polities"></div><section id="qinEvents" hidden><div class="divider"></div><h3>重大历史事件</h3><div id="eventList" class="event-list"></div><article id="eventDetails" tabindex="-1" class="event-details" aria-live="polite"></article></section><div class="divider"></div><h3>历史疆域图层</h3><label class="boundary-switch"><input type="checkbox" id="boundaryToggle" checked> 显示已核验疆域边界</label><div class="boundary-status" id="boundaryStatus" role="status">正在读取疆域资料…</div><div id="boundaryLegend"></div><div class="divider"></div><h3>关于这张地图</h3><p class="muted">本版为交互功能基础版。地图上的点位标注为相应时期的历史名称，坐标仍为待进一步核验的近似位置，<b>不是疆域边界</b>。不代表当年控制范围；边界数据将在完成史料核验后分期加入。</p><p class="muted">年份可逐年浏览，但历史资料并不支持每一年都有精确疆界。政权起止年、都城位置及历史分期均可能存在学术争议。</p></aside>
-<section class="stage"><div id="map" aria-label="中国历史地图"></div><div class="map-note">◎ 历史地理探索版<br>当前仅标示部分政权中心；<b>未绘制推测疆界</b>。默认显示柔和地形，不叠加现代地名；可切换现代地图进行对照。</div>
+<section class="stage"><div id="map" aria-label="中国历史地图"></div><div class="map-note">柔和立体地形底图<br>历史地点和事件标记采用近似位置。</div>
 <div class="timeline"><div class="era-nodes" id="eraNodes" aria-label="历史朝代节点导航"></div><div class="trow"><button class="action" id="play" aria-label="播放时间轴">▶ 播放</button><strong id="timelineYear">前1046年</strong><input id="yearSlider" aria-label="历史年份" type="range" min="0" max="2024" value="0" step="1"><input id="yearInput" class="input-year" aria-label="输入年份，公元前用负数" type="number" min="-1046" max="979" value="-1046"></div><div class="ticks"><span>前1046 · 西周</span><span>前221 · 秦</span><span>220 · 三国</span><span>618 · 唐</span><span>979 · 五代十国末</span></div><div class="hint">拖动时间轴或输入年份（公元前使用负数）；无公元0年。播放按历史时间推进。</div></div></section></main>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="./qin-events.js"></script>
@@ -90,14 +90,10 @@ document.getElementById("shareYear").addEventListener("click",async()=>{const ur
 
 const map=L.map("map",{zoomControl:true,worldCopyJump:false,minZoom:3,maxBounds:[[0,38],[61,157]],maxBoundsViscosity:1}).setView([36,105],4);
 const terrainLayer=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}",{maxNativeZoom:13,maxZoom:18,attribution:'Tiles &copy; Esri; source: Esri, USGS, NOAA'}).addTo(map);
-const referenceLayer=L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
-L.control.layers({"柔和地形（默认）":terrainLayer,"现代地图（对照）":referenceLayer},null,{position:"topleft",collapsed:false}).addTo(map);
 map.fitBounds([[8,56],[54,145]],{padding:[12,12],animate:false});
 const markers=L.layerGroup().addTo(map);
 const eventMarkers=L.layerGroup().addTo(map);
 const qinBounds=L.latLngBounds([[28,101],[41,124]]);
-map.createPane("qinImagePane").style.zIndex="350";
-const qinImage=L.imageOverlay("./assets/qin-map.svg",qinBounds,{pane:"qinImagePane",alt:"秦朝历史地点示意底图"});
 const eventSection=document.getElementById("qinEvents");
 const eventList=document.getElementById("eventList");
 const eventDetails=document.getElementById("eventDetails");
@@ -117,11 +113,9 @@ function renderEvents(year,era){
  if(isQin!==qinMode){
   qinMode=isQin;
   if(isQin){
-   map.addLayer(qinImage);
    map.fitBounds(qinBounds,{animate:false});
-   mapNote.textContent="秦朝自制示意底图 · 标记采用近似位置。可缩放、拖动地图，或选取事件年份。";
+   mapNote.textContent="秦朝 · 地形底图。历史地点和事件标记采用近似位置。";
   }else{
-   map.removeLayer(qinImage);
    map.fitBounds([[8,56],[54,145]],{padding:[12,12],animate:false});
    mapNote.innerHTML=overviewNote;
   }
@@ -193,8 +187,8 @@ const boundaryLayer=L.geoJSON(null,{style:f=>({color:f.properties.color||"#8e744
 let boundaryFeatures=[];let boundaryLoadError=false;
 const boundaryToggle=document.getElementById("boundaryToggle");
 boundaryToggle.addEventListener("change",()=>{if(boundaryToggle.checked){boundaryLayer.addTo(map)}else{map.removeLayer(boundaryLayer)}});
-async function loadBoundaries(){try{const response=await fetch("./data/boundaries.geojson",{cache:"no-cache"});if(!response.ok)throw Error("HTTP "+response.status);const json=await response.json();if(json.type!=="FeatureCollection"||!Array.isArray(json.features))throw Error("数据格式无效");boundaryFeatures=json.features.filter(f=>f&&f.type==="Feature"&&f.geometry&&f.properties&&Number.isInteger(f.properties.startYear)&&Number.isInteger(f.properties.endYear)&&f.properties.startYear<=f.properties.endYear&&f.properties.startYear!==0&&f.properties.endYear!==0&&typeof f.properties.sourceTitle==="string"&&f.properties.sourceTitle.trim()&&typeof f.properties.name==="string");boundaryLoadError=false;}catch(e){boundaryLoadError=true;console.error("历史疆域数据加载失败",e)}updateBoundaries()}
-function updateBoundaries(){const active=boundaryFeatures.filter(f=>current>=f.properties.startYear&&current<=f.properties.endYear);boundaryLayer.clearLayers();boundaryLayer.addData({type:"FeatureCollection",features:active});const status=document.getElementById("boundaryStatus");status.textContent=boundaryLoadError?"疆域数据加载失败，请检查网络或 GeoJSON 文件。":active.length?"当前年份已载入 "+active.length+" 个有资料来源的疆域图层。":"当前年份尚无经过核验的疆域边界数据。地图仅展示历史中心点，不代表疆域。";const legend=document.getElementById("boundaryLegend");legend.replaceChildren();active.forEach(f=>{const p=f.properties;const row=document.createElement("div");row.className="legend-item";const swatch=document.createElement("span");swatch.className="legend-swatch";swatch.style.background=p.color||"#8e744f";const label=document.createElement("span");label.textContent=p.name+" · 参考"+p.referenceYear+"年";row.append(swatch,label);legend.append(row)})}
+async function loadBoundaries(){try{const response=await fetch("./data/boundaries.geojson",{cache:"no-cache"});if(!response.ok)throw Error("HTTP "+response.status);const json=await response.json();if(json.type!=="FeatureCollection"||!Array.isArray(json.features))throw Error("数据格式无效");boundaryFeatures=json.features.filter(f=>f&&f.type==="Feature"&&["Polygon","MultiPolygon"].includes(f.geometry?.type)&&f.properties&&Number.isInteger(f.properties.startYear)&&Number.isInteger(f.properties.endYear)&&f.properties.startYear<=f.properties.endYear&&f.properties.startYear!==0&&f.properties.endYear!==0&&typeof f.properties.sourceTitle==="string"&&f.properties.sourceTitle.trim()&&typeof f.properties.name==="string");boundaryLoadError=false;}catch(e){boundaryLoadError=true;console.error("历史疆域数据加载失败",e)}updateBoundaries()}
+function updateBoundaries(){const active=boundaryFeatures.filter(f=>current>=f.properties.startYear&&current<=f.properties.endYear);boundaryLayer.clearLayers();boundaryLayer.addData({type:"FeatureCollection",features:active});const status=document.getElementById("boundaryStatus");status.textContent=boundaryLoadError?"疆域数据加载失败，请检查网络或 GeoJSON 文件。":active.length?"当前年份已载入 "+active.length+" 个有资料来源的疆域图层。":"当前年份的疆域数据待补充。地图显示地形及已收录的历史地点和事件。";const legend=document.getElementById("boundaryLegend");legend.replaceChildren();active.forEach(f=>{const p=f.properties;const row=document.createElement("div");row.className="legend-item";const swatch=document.createElement("span");swatch.className="legend-swatch";swatch.style.background=p.color||"#8e744f";const label=document.createElement("span");label.textContent=p.name+" · 参考"+p.referenceYear+"年";row.append(swatch,label);legend.append(row)})}
 
 const yearFromIndex=i=>i<1046?i-1046:i-1045;
 const indexFromYear=y=>y<0?y+1046:y+1045;
