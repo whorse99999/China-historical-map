@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" preserveAspectRatio="none">
+<defs><pattern id="grid" width="64" height="58" patternUnits="userSpaceOnUse"><path d="M64 0H0V58" fill="none" stroke="#c7b996" opacity=".5"/></pattern></defs>
+<rect width="960" height="580" fill="#ede4cd"/><rect width="960" height="580" fill="url(#grid)"/>
+<path d="M0 120Q220 28 460 110T960 90M0 148Q220 56 460 138T960 118M0 180Q220 88 460 170T960 150M0 445Q220 340 460 445T960 420M0 480Q220 375 460 480T960 455" fill="none" stroke="#ab9975" opacity=".42" stroke-width="3"/>
+<text x="54" y="92" fill="#402f25" font-size="40" font-family="serif">秦 · 历史地点示意</text>
+<text x="57" y="130" fill="#685747" font-size="20" font-family="sans-serif">卷一　关中与秦末事件</text>
+<text x="57" y="535" fill="#685747" font-size="20" font-family="sans-serif">自制底图 · 地点为近似位置 · 底图无疆界线</text>
+</svg>
