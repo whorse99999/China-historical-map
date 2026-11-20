@@ -1,0 +1,43 @@
+{
+  "taskId": "qin-hetao-north-20261120-v3",
+  "date": "2026-11-20",
+  "preparedBy": "Codex（地图设计部门，证据检索与整理）",
+  "priorTechnicalReview": {
+    "commit": "b699e5e4ce967c0ce3460244a8ccd26466959b08",
+    "identity": "网站开发部门（ChatGPT）",
+    "scope": "v2 技术与交接审查"
+  },
+  "records": [
+    {
+      "scope": "史料与断代",
+      "sources": [
+        "S1",
+        "S4",
+        "S5",
+        "S6"
+      ],
+      "status": "pending",
+      "reviewer": null,
+      "evidenceGap": "同版图例、图组编例及对应年代原文未取得"
+    },
+    {
+      "scope": "测绘坐标",
+      "sources": [
+        "S2",
+        "S3"
+      ],
+      "status": "pending",
+      "reviewer": null,
+      "evidenceGap": "无原始点位记录、基准及误差定义；无同名地物匹配"
+    },
+    {
+      "scope": "发布授权",
+      "sources": [
+        "S7"
+      ],
+      "status": "pending",
+      "reviewer": null,
+      "evidenceGap": "无权利人确认或适用许可文件"
+    }
+  ]
+}
